@@ -63,6 +63,12 @@ describe (TimeZoneDB::class, function () {
         expect ($tz->getUtcOffset())->toBeAn('int');
     });
 
+    it ('->find() has a timestamp in utc', function () {
+        $tz = $this->teazee->find($this->lat, $this->lng);
+
+        expect ($tz->getTimestamp())->toBe(1447744964);
+    });
+
     it ('->find() can check for daylight savings time', function () {
         $tz = $this->teazee->find($this->lat, $this->lng);
 
