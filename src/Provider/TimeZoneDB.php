@@ -55,7 +55,7 @@ class TimeZoneDB extends AbstractHttpProvider
         return $this->returnResult(array_merge($this->getDefaults(), [
             'id'        => $data->zoneName,
             'dst'       => (bool) $data->dst,
-            'timestamp' => $data->timestamp,
+            'timestamp' => $data->timestamp - $data->gmtOffset,
             'utcOffset' => $data->gmtOffset,
         ]));
     }
