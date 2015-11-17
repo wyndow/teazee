@@ -1,0 +1,126 @@
+
+-
+    request:
+        method: GET
+        url: 'https://api.timezonedb.com/?key=TVDB_TEAZEE_KEY&lat=40.1146914&lng=-88.3121289&format=json'
+        headers:
+            Host: api.timezonedb.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.0 curl/7.43.0 PHP/5.5.23'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Date: 'Tue, 17 Nov 2015 07:26:03 GMT'
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Access-Control-Allow-Origin: '*'
+            Strict-Transport-Security: max-age=63072000
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+        body: '{"status":"OK","message":"","countryCode":"US","zoneName":"America\/Chicago","abbreviation":"CST","gmtOffset":"-21600","dst":"0","timestamp":1447723364}'
+-
+    request:
+        method: GET
+        url: 'https://api.timezonedb.com/?lat=40.1146914&lng=-88.3121289&format=json'
+        headers:
+            Host: api.timezonedb.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.0 curl/7.43.0 PHP/5.5.23'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Date: 'Tue, 17 Nov 2015 07:26:04 GMT'
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Access-Control-Allow-Origin: '*'
+            Strict-Transport-Security: max-age=63072000
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+        body: '{"status":"FAIL","message":"Parameter \"key\" (API Key) is not provided.","countryCode":"","zoneName":"","abbreviation":"","gmtOffset":"0","dst":"0","timestamp":"0"}'
+-
+    request:
+        method: GET
+        url: 'https://api.timezonedb.com/?key=TEAZEE_BAD_KEY&lat=40.1146914&lng=-88.3121289&format=json'
+        headers:
+            Host: api.timezonedb.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.0 curl/7.43.0 PHP/5.5.23'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Date: 'Tue, 17 Nov 2015 07:26:05 GMT'
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Access-Control-Allow-Origin: '*'
+            Strict-Transport-Security: max-age=63072000
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+        body: '{"status":"FAIL","message":"Invalid API key.","countryCode":"","zoneName":"","abbreviation":"","gmtOffset":"0","dst":"0","timestamp":"0"}'
+-
+    request:
+        method: GET
+        url: 'https://api.timezonedb.com/?key=TVDB_TEAZEE_KEY&lat=foo&lng=bar&format=json'
+        headers:
+            Host: api.timezonedb.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.0 curl/7.43.0 PHP/5.5.23'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Date: 'Tue, 17 Nov 2015 07:26:06 GMT'
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Access-Control-Allow-Origin: '*'
+            Strict-Transport-Security: max-age=63072000
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+        body: '{"status":"FAIL","message":"Invalid latitude value.","countryCode":"","zoneName":"","abbreviation":"","gmtOffset":"0","dst":"0","timestamp":"0"}'
+-
+    request:
+        method: GET
+        url: 'https://api.timezonedb.com/?key=TVDB_TEAZEE_KEY&lat=40.1146914&lng=-88.3121289&time=1446296400&format=json'
+        headers:
+            Host: api.timezonedb.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.0 curl/7.43.0 PHP/5.5.23'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Date: 'Tue, 17 Nov 2015 07:40:55 GMT'
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Access-Control-Allow-Origin: '*'
+            Strict-Transport-Security: max-age=63072000
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+        body: '{"status":"OK","message":"","countryCode":"US","zoneName":"America\/Chicago","abbreviation":"CDT","gmtOffset":"-18000","dst":"1","timestamp":1446278400}'
