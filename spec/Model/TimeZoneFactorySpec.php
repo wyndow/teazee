@@ -67,6 +67,10 @@ describe(TimeZoneFactory::class, function () {
         it ('has no timestamp', function () {
             expect($this->tz->getTimestamp())->toBeNull();
         });
+
+        it ('has no DateTime', function () {
+            expect($this->tz->getDateTime())->toBeNull();
+        });
     });
 
     context ('with US Pacific', function () {
@@ -96,6 +100,10 @@ describe(TimeZoneFactory::class, function () {
             it ('->getTimestamp()', function () {
                 expect($this->tz->getTimestamp())->toBe(1446303600);
             });
+
+            it ('->getDateTime()', function () {
+                expect($this->tz->getDateTime()->format('Y-m-d H:i:s'))->toBe('2015-10-31 08:00:00');
+            });
         });
 
         context ('when not DST', function () {
@@ -121,6 +129,10 @@ describe(TimeZoneFactory::class, function () {
 
             it ('->getTimestamp()', function () {
                 expect($this->tz->getTimestamp())->toBe(1446480000);
+            });
+
+            it ('->getDateTime()', function () {
+                expect($this->tz->getDateTime()->format('Y-m-d H:i:s'))->toBe('2015-11-02 08:00:00');
             });
         });
     });
