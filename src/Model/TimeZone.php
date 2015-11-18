@@ -10,11 +10,17 @@
 
 namespace Teazee\Model;
 
+use DateTimeImmutable;
 use DateTimeZone;
 
+/**
+ * @author Michael Crumm <mike@crumm.net>
+ */
 final class TimeZone
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $country;
 
     /**
@@ -33,23 +39,23 @@ final class TimeZone
     private $utcOffset;
 
     /**
-     * @var \DateTimeZone
+     * @var DateTimeZone
      */
     private $dateTimeZone;
 
     /**
-     * @var \DateTimeImmutable
+     * @var DateTimeImmutable
      */
     private $dateTime;
 
     /**
      * TimeZone Constructor.
      *
-     * @param DateTimeZone $zone
-     * @param bool $dst Whether or not this TimeZone is in DST.
-     * @param int $utcOffset Offset from UTC.
-     * @param int $timestamp UNIX timestamp.
-     * @param string $country
+     * @param DateTimeZone $zone      DateTimeZone.
+     * @param bool         $dst       Whether or not this TimeZone is in DST.
+     * @param int          $utcOffset Offset from UTC.
+     * @param int          $timestamp UNIX timestamp.
+     * @param string       $country   Country code.
      */
     public function __construct(DateTimeZone $zone, $dst, $utcOffset, $timestamp, $country = null)
     {
@@ -65,6 +71,8 @@ final class TimeZone
     }
 
     /**
+     * Returns the country code.
+     *
      * @return string
      */
     public function getCountry()
@@ -73,6 +81,8 @@ final class TimeZone
     }
 
     /**
+     * Returns the timezone name.
+     *
      * @return string
      */
     public function getName()
@@ -81,7 +91,9 @@ final class TimeZone
     }
 
     /**
-     * @return \DateTimeImmutable
+     * Returns a DateTimeImmutable for the provided timestamp.
+     *
+     * @return DateTimeImmutable
      */
     public function getDateTime()
     {
@@ -89,6 +101,8 @@ final class TimeZone
     }
 
     /**
+     * Returns the DateTimeZone for this TimeZone.
+     *
      * @return DateTimeZone
      */
     public function getDateTimeZone()
@@ -97,6 +111,8 @@ final class TimeZone
     }
 
     /**
+     * Returns a UNIX timestamp.
+     *
      * @return int|null
      */
     public function getTimestamp()
@@ -105,7 +121,9 @@ final class TimeZone
     }
 
     /**
-     * @return int
+     * Returns the UTC offset for this TimeZone.
+     *
+     * @return int|null
      */
     public function getUtcOffset()
     {
@@ -113,7 +131,9 @@ final class TimeZone
     }
 
     /**
-     * @return bool
+     * Checks whether or not this TimeZone is on Daylight Savings Time.
+     *
+     * @return bool True when the TimeZone is on Daylight Savings Time.
      */
     public function isDst()
     {

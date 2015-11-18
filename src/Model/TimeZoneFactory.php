@@ -12,11 +12,18 @@ namespace Teazee\Model;
 
 use DateTimeZone;
 
+/**
+ * @author Michael Crumm <mike@crumm.net>
+ */
 class TimeZoneFactory
 {
     /**
+     * Creates a TimeZone object from an array of parameters.
+     *
      * @param array $data
+     *
      * @return TimeZone
+     *
      * @throws \Exception When given an invalid time zone identifier.
      */
     public function create($data)
@@ -31,8 +38,9 @@ class TimeZoneFactory
     }
 
     /**
-     * @param  array  $data
-     * @param  string $key
+     * @param array  $data
+     * @param string $key
+     *
      * @return mixed
      */
     private function getValue(array $data, $key)
@@ -42,7 +50,8 @@ class TimeZoneFactory
 
     /**
      * @param mixed $str
-     * @return string|null
+     *
+     * @return mixed
      */
     private function valueOrNull($str)
     {

@@ -14,7 +14,12 @@ use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
+/**
+ * @author Michael Crumm <mike@crumm.net>
+ */
 abstract class AbstractHttpProvider extends AbstractProvider
 {
     /**
@@ -30,8 +35,8 @@ abstract class AbstractHttpProvider extends AbstractProvider
     /**
      * AbstractHttpProvider Constructor.
      *
-     * @param HttpClient $client
-     * @param MessageFactory $messageFactory
+     * @param HttpClient     $client         HttpClient makes HTTP requests.
+     * @param MessageFactory $messageFactory MessageFactory creates Request objects.
      */
     public function __construct(HttpClient $client = null, MessageFactory $messageFactory = null)
     {
@@ -42,6 +47,8 @@ abstract class AbstractHttpProvider extends AbstractProvider
     }
 
     /**
+     * Returns the HttpClient instance for this Provider.
+     *
      * @return HttpClient
      */
     public function getClient()
@@ -50,9 +57,12 @@ abstract class AbstractHttpProvider extends AbstractProvider
     }
 
     /**
-     * @param string|\Psr\Http\Message\UriInterface $uri
-     * @param string $method
-     * @return \Psr\Http\Message\ResponseInterface
+     * Returns a ResponseInterface for the given URI/method.
+     *
+     * @param string|UriInterface $uri    Request URI.
+     * @param string              $method HTTP method (Defaults to 'GET').
+     *
+     * @return ResponseInterface
      */
     protected function getResponse($uri, $method = 'GET')
     {
