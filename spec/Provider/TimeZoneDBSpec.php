@@ -39,28 +39,8 @@ describe (TimeZoneDB::class, function () {
             expect ($this->tz)->toBeAnInstanceOf(TimeZone::class);
         });
 
-        it ('->find() has a DateTimeZone', function () {
-            expect ($this->tz->getDateTimeZone())->toBeAnInstanceOf(DateTimeZone::class);
-        });
-
-        it ('->find() has a name', function () {
-            expect ($this->tz->getName())->toBe('America/Chicago');
-        });
-
-        it ('->find() has a timestamp', function () {
-            expect ($this->tz->getTimestamp())->toBeAn('int');
-        });
-
-        it ('->find() has a utc offset', function () {
-            expect ($this->tz->getUtcOffset())->toBeAn('int');
-        });
-
         it ('->find() has a timestamp in utc', function () {
             expect ($this->tz->getTimestamp())->toBe(1447744964);
-        });
-
-        it ('->find() can check for daylight savings time', function () {
-            expect ($this->tz->isDst())->toBeFalsy();
         });
     });
 
