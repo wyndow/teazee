@@ -10,26 +10,24 @@
 
 namespace Teazee\Model;
 
-use DateTimeZone;
-
 /**
  * @author Michael Crumm <mike@crumm.net>
  */
-class TimeZoneFactory
+final class ZoneInfoFactory
 {
     /**
-     * Creates a TimeZone object from an array of parameters.
+     * Creates a ZoneInfo object from an array of parameters.
      *
      * @param array $data
      *
-     * @return TimeZone
+     * @return ZoneInfo
      *
      * @throws \Exception When given an invalid time zone identifier.
      */
     public function create($data)
     {
-        return new TimeZone(
-            new DateTimeZone($this->getValue($data, 'id')),
+        return new ZoneInfo(
+            $this->getValue($data, 'id'),
             $this->getValue($data, 'dst'),
             $this->getValue($data, 'utcOffset'),
             $this->getValue($data, 'timestamp'),

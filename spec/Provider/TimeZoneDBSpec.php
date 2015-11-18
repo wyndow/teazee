@@ -3,10 +3,9 @@
 namespace Teazee\Spec\Provider;
 
 use Http\Client\HttpClient;
-use Teazee\Model\TimeZone;
+use Teazee\Model\ZoneInfo;
 use Teazee\Provider\TimeZoneDB;
 use VCR\VCR;
-use DateTimeZone;
 use RuntimeException;
 
 describe (TimeZoneDB::class, function () {
@@ -36,7 +35,7 @@ describe (TimeZoneDB::class, function () {
         });
 
         it ('->find() returns a TimeZone', function () {
-            expect ($this->tz)->toBeAnInstanceOf(TimeZone::class);
+            expect ($this->tz)->toBeAnInstanceOf(ZoneInfo::class);
         });
 
         it ('->find() has a timestamp in utc', function () {

@@ -4,7 +4,7 @@ A simple interface to find the timezone and time offset data for a position on t
 
 * [Installation](#installation)
 * [Usage](#usage)
-  - [TimeZone](#timezone)
+  - [ZoneInfo](#zoneinfo)
   - [Providers](#providers)
     - [TimeZoneDB](#timezonedb)
   - [HTTP Clients](#http-clients)
@@ -30,17 +30,17 @@ The `Teazee` interface, which all providers implement, exposes a single method:
 
 * `find($lat, $lng, $timestamp)`
 
-### TimeZone
+### ZoneInfo
 
-The `find()` method returns a `TimeZone` object, which provides the following API:
+The `find()` method returns a `ZoneInfo` object, which extends PHP's [`DateTimeZone`](http://php.net/manual/en/class.datetimezone.php) and exposes the following additional methods:
 
-* `getName()` will return the [IANA Time Zone ID](http://www.iana.org/time-zones).
-* `getDateTimeZone()` will return a [`DateTimeZone`](http://php.net/manual/en/class.datetimezone.php) object for the [IANA TimeZone](http://www.iana.org/time-zones) returned from the Provider.
-* `getDateTime()` will return a [`DateTimeImmutable`](http://php.net/manual/en/class.datetimeimmutable.php) object representing the specified `timestamp` in the returned `DateTimeZone`.
+* `getDateTime()` will return a [`DateTimeImmutable`](http://php.net/manual/en/class.datetimeimmutable.php) representing the specified `timestamp`.
 * `getTimestamp()` will return a UNIX timestamp (`int`) for the specified `timestamp`. Generally this value is used to determine whether or not Daylight Savings Time should be applied. Not all providers require a timestamp. If the timestamp is required, but not provided, the current time will be used.
-* `getUtcOffset()` will return the offset from UTC (in seconds) for the given location.
-* `isDst()` will return a `boolean` representing whether or not the TimeZone is in Daylight Savings Time during the specified `timestamp`.
-* `getCountry()` will return the 2-digit country code the for `DateTimeZone`.
+* `getUtcOffset()` will return the offset (`int`) from UTC (in seconds) for the given location.
+* `isDst()` will return a `boolean` representing whether or not the timezone is in Daylight Savings Time during the specified `timestamp`.
+* `getCountry()` will return the 2-digit country code for the timezone.
+
+> **Note**: You can use `ZoneInfo` as a drop-in replacement for `DateTimeZone` in your code.
 
 
 ### Providers
