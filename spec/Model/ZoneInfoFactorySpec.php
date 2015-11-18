@@ -2,13 +2,13 @@
 
 namespace Teazee\Spec\Model;
 
-use Teazee\Model\TimeZoneFactory;
-use Teazee\Model\TimeZone;
+use Teazee\Model\ZoneInfoFactory;
+use Teazee\Model\ZoneInfo;
 use DateTimeZone;
 
-describe(TimeZoneFactory::class, function () {
+describe(ZoneInfoFactory::class, function () {
     before (function () {
-        $this->factory = new TimeZoneFactory();
+        $this->factory = new ZoneInfoFactory();
     });
 
     context ('with defaults', function () {
@@ -44,12 +44,12 @@ describe(TimeZoneFactory::class, function () {
             $this->tz = $this->factory->create($this->values);
         });
 
-        it ('creates a ' . TimeZone::class, function () {
-            expect($this->tz)->toBeAnInstanceOf(TimeZone::class);
+        it ('creates a ' . ZoneInfo::class, function () {
+            expect($this->tz)->toBeAnInstanceOf(ZoneInfo::class);
         });
 
-        it ('->getDateTimeZone()', function () {
-            expect($this->tz->getDateTimeZone())->toBeAnInstanceOf(DateTimeZone::class);
+        it ('is a ' . DateTimeZone::class, function () {
+            expect($this->tz)->toBeAnInstanceOf(DateTimeZone::class);
         });
 
         it ('->getName()', function () {

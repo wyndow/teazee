@@ -10,7 +10,7 @@
 
 namespace Teazee;
 
-use Teazee\Model\TimeZone;
+use Teazee\Model\ZoneInfo;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -29,7 +29,7 @@ interface Teazee
      * @param string|float $lng       Longitude coordinate.
      * @param int          $timestamp Timestamp used to determine daylight savings time.
      *
-     * @return TimeZone
+     * @return ZoneInfo
      */
     public function find($lat, $lng, $timestamp);
 }
