@@ -6,6 +6,9 @@ use DateTimeZone;
 
 final class TimeZone
 {
+    /** @var string */
+    private $country;
+
     /**
      * @var bool
      */
@@ -38,17 +41,27 @@ final class TimeZone
      * @param bool $dst Whether or not this TimeZone is in DST.
      * @param int $utcOffset Offset from UTC.
      * @param int $timestamp UNIX timestamp.
+     * @param string $country
      */
-    public function __construct(DateTimeZone $zone, $dst, $utcOffset, $timestamp)
+    public function __construct(DateTimeZone $zone, $dst, $utcOffset, $timestamp, $country = null)
     {
         $this->dateTimeZone = $zone;
         $this->dst          = $dst ? (bool) $dst : null;
         $this->utcOffset    = $utcOffset ? (int) $utcOffset : null;
         $this->timestamp    = $timestamp ? (int) $timestamp : null;
+        $this->country      = $country ?: $this->dateTimeZone->getLocation()['country_code'];
 
         if ($this->timestamp) {
             $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($zone);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 
     /**

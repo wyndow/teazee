@@ -71,6 +71,18 @@ describe(TimeZoneFactory::class, function () {
         it ('has no DateTime', function () {
             expect($this->tz->getDateTime())->toBeNull();
         });
+
+        it ('knows not the country code', function () {
+           expect($this->tz->getCountry())->toBe('??');
+        });
+
+        it ('can override the country code', function () {
+            $data = $this->values + ['country' => 'UK'];
+
+            $this->tz = $this->factory->create($data);
+
+            expect($this->tz->getCountry())->toBe('UK');
+        });
     });
 
     context ('with US Pacific', function () {

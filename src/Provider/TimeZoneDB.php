@@ -57,6 +57,7 @@ class TimeZoneDB extends AbstractHttpProvider
             'dst'       => (bool) $data->dst,
             'timestamp' => $data->timestamp - $data->gmtOffset,
             'utcOffset' => $data->gmtOffset,
+            'country'   => $data->countryCode,
         ]));
     }
 
