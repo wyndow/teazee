@@ -38,7 +38,7 @@ final class TimeZone
     {
         $this->dateTimeZone = $zone;
         $this->dst = (bool) $dst;
-        $this->utcOffset = (int) $utcOffset;
+        $this->utcOffset = $utcOffset ? (int) $utcOffset : null;
         $this->timestamp = $timestamp ? (int) $timestamp : null;
     }
 

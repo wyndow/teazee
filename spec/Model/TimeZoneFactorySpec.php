@@ -61,7 +61,7 @@ describe(TimeZoneFactory::class, function () {
         });
 
         it ('has no utc offset', function () {
-            expect($this->tz->getUtcOffset())->toBe(0);
+            expect($this->tz->getUtcOffset())->toBeNull();
         });
 
         it ('has no timestamp', function () {
