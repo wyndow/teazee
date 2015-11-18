@@ -1,9 +1,21 @@
 <?php
 
+/**
+ * This file is part of the Teazee package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
+use Teazee\Model\TimeZone;
 
+/**
+ * @author Michael Crumm <mike@crumm.net>
+ */
 class TimeZoneDB extends AbstractHttpProvider
 {
     const ENDPOINT = 'https://api.timezonedb.com/';
@@ -18,7 +30,7 @@ class TimeZoneDB extends AbstractHttpProvider
     /**
      * TimeZoneDB Constructor.
      *
-     * @param string $apiKey
+     * @param string     $apiKey
      * @param HttpClient $client
      */
     public function __construct($apiKey, HttpClient $client = null)
@@ -29,6 +41,8 @@ class TimeZoneDB extends AbstractHttpProvider
     }
 
     /**
+     * Returns the name of this Provider.
+     *
      * @return string
      */
     public function getName()
@@ -37,10 +51,13 @@ class TimeZoneDB extends AbstractHttpProvider
     }
 
     /**
-     * @param string|float $lat
-     * @param string|float $lng
-     * @param int $timestamp
-     * @return \Teazee\Model\TimeZone
+     * Returns a TimeZone for the specified location and timestamp.
+     *
+     * @param string|float $lat       Coordinate latitude.
+     * @param string|float $lng       Coordinate longitude.
+     * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
+     *
+     * @return TimeZone
      */
     public function find($lat, $lng, $timestamp = null)
     {
@@ -55,15 +72,19 @@ class TimeZoneDB extends AbstractHttpProvider
         return $this->returnResult(array_merge($this->getDefaults(), [
             'id'        => $data->zoneName,
             'dst'       => (bool) $data->dst,
-            'timestamp' => $data->timestamp,
+            'timestamp' => $data->timestamp - $data->gmtOffset,
             'utcOffset' => $data->gmtOffset,
+            'country'   => $data->countryCode,
         ]));
     }
 
     /**
-     * @param $lat
-     * @param $lng
-     * @param null $timestamp
+     * Returns the URI for the specified location and timestamp.
+     *
+     * @param string|float $lat       Coordinate latitude.
+     * @param string|float $lng       Coordinate longitude.
+     * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
+     *
      * @return string
      */
     private function buildQuery($lat, $lng, $timestamp = null)
