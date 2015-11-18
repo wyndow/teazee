@@ -27,6 +27,11 @@ final class TimeZone
     private $dateTimeZone;
 
     /**
+     * @var \DateTimeImmutable
+     */
+    private $dateTime;
+
+    /**
      * TimeZone Constructor.
      *
      * @param DateTimeZone $zone
@@ -37,9 +42,13 @@ final class TimeZone
     public function __construct(DateTimeZone $zone, $dst, $utcOffset, $timestamp)
     {
         $this->dateTimeZone = $zone;
-        $this->dst = (bool) $dst;
-        $this->utcOffset = (int) $utcOffset;
-        $this->timestamp = $timestamp ? (int) $timestamp : null;
+        $this->dst          = $dst ? (bool) $dst : null;
+        $this->utcOffset    = $utcOffset ? (int) $utcOffset : null;
+        $this->timestamp    = $timestamp ? (int) $timestamp : null;
+
+        if ($this->timestamp) {
+            $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($zone);
+        }
     }
 
     /**
@@ -48,6 +57,14 @@ final class TimeZone
     public function getName()
     {
         return $this->dateTimeZone->getName();
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
     }
 
     /**
