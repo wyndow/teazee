@@ -16,7 +16,7 @@ use DateTimeZone;
 /**
  * @author Michael Crumm <mike@crumm.net>
  */
-final class TimeZone
+final class ZoneInfo extends DateTimeZone
 {
     /**
      * @var string
@@ -39,11 +39,6 @@ final class TimeZone
     private $utcOffset;
 
     /**
-     * @var DateTimeZone
-     */
-    private $dateTimeZone;
-
-    /**
      * @var DateTimeImmutable
      */
     private $dateTime;
@@ -51,22 +46,23 @@ final class TimeZone
     /**
      * TimeZone Constructor.
      *
-     * @param DateTimeZone $zone      DateTimeZone.
+     * @param string $timezone Timezone identifier.
      * @param bool         $dst       Whether or not this TimeZone is in DST.
      * @param int          $utcOffset Offset from UTC.
      * @param int          $timestamp UNIX timestamp.
      * @param string       $country   Country code.
      */
-    public function __construct(DateTimeZone $zone, $dst, $utcOffset, $timestamp, $country = null)
+    public function __construct($timezone, $dst, $utcOffset, $timestamp, $country = null)
     {
-        $this->dateTimeZone = $zone;
+        parent::__construct($timezone);
+
         $this->dst          = $dst ? (bool) $dst : null;
         $this->utcOffset    = $utcOffset ? (int) $utcOffset : null;
         $this->timestamp    = $timestamp ? (int) $timestamp : null;
-        $this->country      = $country ?: $this->dateTimeZone->getLocation()['country_code'];
+        $this->country      = $country ?: $this->getLocation()['country_code'];
 
         if ($this->timestamp) {
-            $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($zone);
+            $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($this);
         }
     }
 
@@ -81,16 +77,6 @@ final class TimeZone
     }
 
     /**
-     * Returns the timezone name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->dateTimeZone->getName();
-    }
-
-    /**
      * Returns a DateTimeImmutable for the provided timestamp.
      *
      * @return DateTimeImmutable
@@ -98,16 +84,6 @@ final class TimeZone
     public function getDateTime()
     {
         return $this->dateTime;
-    }
-
-    /**
-     * Returns the DateTimeZone for this TimeZone.
-     *
-     * @return DateTimeZone
-     */
-    public function getDateTimeZone()
-    {
-        return $this->dateTimeZone;
     }
 
     /**

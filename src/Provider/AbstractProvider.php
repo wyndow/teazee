@@ -10,8 +10,8 @@
 
 namespace Teazee\Provider;
 
-use Teazee\Model\TimeZone;
-use Teazee\Model\TimeZoneFactory;
+use Teazee\Model\ZoneInfo;
+use Teazee\Model\ZoneInfoFactory;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -19,7 +19,7 @@ use Teazee\Model\TimeZoneFactory;
 abstract class AbstractProvider implements Provider
 {
     /**
-     * @var TimeZoneFactory
+     * @var ZoneInfoFactory
      */
     private $factory;
 
@@ -28,11 +28,11 @@ abstract class AbstractProvider implements Provider
      */
     public function __construct()
     {
-        $this->factory = new TimeZoneFactory();
+        $this->factory = new ZoneInfoFactory();
     }
 
     /**
-     * Returns the default values for creating a TimeZone.
+     * Returns the default values for creating ZoneInfo.
      *
      * @return array
      */
@@ -47,11 +47,11 @@ abstract class AbstractProvider implements Provider
     }
 
     /**
-     * Creates a TimeZone from the given parameters via the TimeZoneFactory.
+     * Creates ZoneInfo from the given parameters via the ZoneInfoFactory.
      *
      * @param array $data
      *
-     * @return TimeZone
+     * @return ZoneInfo
      */
     protected function returnResult(array $data)
     {

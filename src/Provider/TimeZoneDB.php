@@ -11,7 +11,7 @@
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
-use Teazee\Model\TimeZone;
+use Teazee\Model\ZoneInfo;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -51,13 +51,13 @@ class TimeZoneDB extends AbstractHttpProvider
     }
 
     /**
-     * Returns a TimeZone for the specified location and timestamp.
+     * Returns ZoneInfo for the specified location and timestamp.
      *
      * @param string|float $lat       Coordinate latitude.
      * @param string|float $lng       Coordinate longitude.
      * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
      *
-     * @return TimeZone
+     * @return ZoneInfo
      */
     public function find($lat, $lng, $timestamp = null)
     {
