@@ -20,6 +20,7 @@ use Teazee\Model\ZoneInfo;
 class TimeZoneDB extends AbstractHttpProvider
 {
     const ENDPOINT = 'https://api.timezonedb.com/';
+    const VIP_ENDPOINT = 'https://vip.timezonedb.com/';
     const FAIL = 'FAIL';
     const SUCCESS = 'OK';
 
@@ -29,17 +30,28 @@ class TimeZoneDB extends AbstractHttpProvider
     private $apiKey;
 
     /**
+     * @var string
+     */
+    private $host;
+
+    /**
      * TimeZoneDB Constructor.
      *
      * @param string         $apiKey
+     * @param bool           $premium
      * @param HttpClient     $client
      * @param MessageFactory $messageFactory
      */
-    public function __construct($apiKey, HttpClient $client = null, MessageFactory $messageFactory = null)
-    {
+    public function __construct(
+        $apiKey,
+        $premium = false,
+        HttpClient $client = null,
+        MessageFactory $messageFactory = null
+    ) {
         parent::__construct($client, $messageFactory);
 
         $this->apiKey = $apiKey;
+        $this->host = (bool) $premium ? static::VIP_ENDPOINT : static::ENDPOINT;
     }
 
     /**
@@ -102,6 +114,6 @@ class TimeZoneDB extends AbstractHttpProvider
         // Remove null values.
         $params = array_filter($params);
 
-        return static::ENDPOINT.'?'.http_build_query($params);
+        return $this->host.'?'.http_build_query($params);
     }
 }
