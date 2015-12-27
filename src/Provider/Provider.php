@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee\Provider;
 
 use Teazee\Teazee;
