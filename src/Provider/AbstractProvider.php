@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee\Provider;
 
 use Teazee\Model\ZoneInfo;
@@ -39,8 +38,8 @@ abstract class AbstractProvider implements Provider
     protected function getDefaults()
     {
         return [
-            'dst' => null,
-            'id' => null,
+            'dst'       => null,
+            'id'        => null,
             'timestamp' => null,
             'utcOffset' => null,
         ];

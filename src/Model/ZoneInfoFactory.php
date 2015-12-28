@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee\Model;
 
 /**
@@ -20,9 +19,9 @@ final class ZoneInfoFactory
      *
      * @param array $data
      *
-     * @return ZoneInfo
-     *
      * @throws \Exception When given an invalid time zone identifier.
+     *
+     * @return ZoneInfo
      */
     public function create($data)
     {
@@ -53,6 +52,6 @@ final class ZoneInfoFactory
      */
     private function valueOrNull($str)
     {
-        return empty ($str) ? null : $str;
+        return empty($str) ? null : $str;
     }
 }

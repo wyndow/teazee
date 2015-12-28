@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee;
 
 use Teazee\Model\ZoneInfo;
@@ -18,7 +17,7 @@ use Teazee\Model\ZoneInfo;
 interface Teazee
 {
     /**
-     * Version
+     * Version.
      */
     const VERSION = '0.2.1-dev';
 
