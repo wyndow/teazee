@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee\Model;
 
 use DateTimeImmutable;
@@ -46,20 +45,20 @@ final class ZoneInfo extends DateTimeZone
     /**
      * TimeZone Constructor.
      *
-     * @param string $timezone Timezone identifier.
-     * @param bool         $dst       Whether or not this TimeZone is in DST.
-     * @param int          $utcOffset Offset from UTC.
-     * @param int          $timestamp UNIX timestamp.
-     * @param string       $country   Country code.
+     * @param string $timezone  Timezone identifier.
+     * @param bool   $dst       Whether or not this TimeZone is in DST.
+     * @param int    $utcOffset Offset from UTC.
+     * @param int    $timestamp UNIX timestamp.
+     * @param string $country   Country code.
      */
     public function __construct($timezone, $dst, $utcOffset, $timestamp, $country = null)
     {
         parent::__construct($timezone);
 
-        $this->dst          = $dst ? (bool) $dst : null;
-        $this->utcOffset    = $utcOffset ? (int) $utcOffset : null;
-        $this->timestamp    = $timestamp ? (int) $timestamp : null;
-        $this->country      = $country ?: $this->getLocation()['country_code'];
+        $this->dst = $dst ? (bool) $dst : null;
+        $this->utcOffset = $utcOffset ? (int) $utcOffset : null;
+        $this->timestamp = $timestamp ? (int) $timestamp : null;
+        $this->country = $country ?: $this->getLocation()['country_code'];
 
         if ($this->timestamp) {
             $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($this);

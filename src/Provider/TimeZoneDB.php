@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
@@ -61,9 +60,9 @@ class TimeZoneDB extends AbstractHttpProvider
      */
     public function find($lat, $lng, $timestamp = null)
     {
-        $query    = $this->buildQuery($lat, $lng, $timestamp);
+        $query = $this->buildQuery($lat, $lng, $timestamp);
         $response = $this->getResponse($query);
-        $data     = json_decode($response->getBody()->getContents());
+        $data = json_decode($response->getBody()->getContents());
 
         if (static::FAIL === $data->status) {
             throw new \RuntimeException($data->message);
@@ -100,6 +99,6 @@ class TimeZoneDB extends AbstractHttpProvider
         // Remove null values.
         $params = array_filter($params);
 
-        return static::ENDPOINT . '?' . http_build_query($params);
+        return static::ENDPOINT.'?'.http_build_query($params);
     }
 }
