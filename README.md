@@ -1,6 +1,9 @@
 ## Teazee
 
+[![License](https://img.shields.io/packagist/l/wyndow/teazee.svg?style=flat-square)](https://packagist.org/packages/wyndow/teazee) [![Build Status](https://img.shields.io/travis/wyndow/teazee.svg?style=flat-square)](https://travis-ci.org/wyndow/teazee) [![Code Quality](https://img.shields.io/scrutinizer/g/wyndow/teazee.svg?style=flat-square)](https://scrutinizer-ci.com/g/wyndow/teazee/) [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/wyndow/teazee.svg?style=flat-square)](https://scrutinizer-ci.com/g/wyndow/teazee/) [![Package Version](https://img.shields.io/packagist/v/wyndow/teazee.svg?style=flat-square)](https://packagist.org/packages/wyndow/teazee)
+
 A simple interface to find the timezone and time offset data for a position on the surface of the earth.
+
 
 * [Installation](#installation)
 * [Usage](#usage)
