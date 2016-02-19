@@ -10,11 +10,10 @@
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Teazee\Exception\ServiceMissingException;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -41,8 +40,17 @@ abstract class AbstractHttpProvider extends AbstractProvider
     {
         parent::__construct();
 
-        $this->client = $client ?: HttpClientDiscovery::find();
-        $this->messageFactory = $messageFactory ?: MessageFactoryDiscovery::find();
+        if (null === $client && !class_exists('Http\Discovery\HttpClientDiscovery')) {
+            throw ServiceMissingException::noHttpClient();
+        }
+
+        $this->client = $client ?: \Http\Discovery\HttpClientDiscovery::find();
+
+        if (null === $messageFactory && !class_exists('Http\Discovery\MessageFactoryDiscovery')) {
+            throw ServiceMissingException::noMessageFactory();
+        }
+
+        $this->messageFactory = $messageFactory ?: \Http\Discovery\MessageFactoryDiscovery::find();
     }
 
     /**
