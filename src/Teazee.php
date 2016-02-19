@@ -19,7 +19,7 @@ interface Teazee
     /**
      * Version.
      */
-    const VERSION = '0.2.1';
+    const VERSION = '0.2.2';
 
     /**
      * Finds a TimeZone for a location on the surface of the earth.
