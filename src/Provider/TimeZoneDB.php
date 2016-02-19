@@ -10,6 +10,8 @@
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
+use RuntimeException;
 use Teazee\Model\ZoneInfo;
 
 /**
@@ -29,12 +31,13 @@ class TimeZoneDB extends AbstractHttpProvider
     /**
      * TimeZoneDB Constructor.
      *
-     * @param string     $apiKey
-     * @param HttpClient $client
+     * @param string         $apiKey
+     * @param HttpClient     $client
+     * @param MessageFactory $messageFactory
      */
-    public function __construct($apiKey, HttpClient $client = null)
+    public function __construct($apiKey, HttpClient $client = null, MessageFactory $messageFactory = null)
     {
-        parent::__construct($client);
+        parent::__construct($client, $messageFactory);
 
         $this->apiKey = $apiKey;
     }
@@ -65,7 +68,7 @@ class TimeZoneDB extends AbstractHttpProvider
         $data = json_decode($response->getBody()->getContents());
 
         if (static::FAIL === $data->status) {
-            throw new \RuntimeException($data->message);
+            throw new RuntimeException($data->message);
         }
 
         return $this->returnResult(array_merge($this->getDefaults(), [
