@@ -60,8 +60,8 @@ final class ZoneInfo extends DateTimeZone
         $this->timestamp = $timestamp ? (int) $timestamp : null;
         $this->country = $country ?: $this->getLocation()['country_code'];
 
-        if ($this->timestamp) {
-            $this->dateTime = (new \DateTimeImmutable('@'.$this->timestamp))->setTimezone($this);
+        if (null !== $this->timestamp) {
+            $this->dateTime = (new DateTimeImmutable('@'.$this->timestamp))->setTimezone($this);
         }
     }
 
