@@ -54,6 +54,10 @@ describe(GoogleMaps::class, function () {
         it('->find() returns with the given timestamp', function () {
             expect($this->tz->getTimestamp())->toBe($this->time);
         });
+
+        it('->find() knows if isDst', function () {
+            expect($this->tz->isDst())->toBe(false);
+        });
     });
 
     context('with invalid parameters', function () {

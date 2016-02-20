@@ -52,6 +52,6 @@ final class ZoneInfoFactory
      */
     private function valueOrNull($str)
     {
-        return empty($str) ? null : $str;
+        return (false !== $str && empty($str)) ? null : $str;
     }
 }
