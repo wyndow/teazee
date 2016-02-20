@@ -1,0 +1,89 @@
+
+-
+    request:
+        method: GET
+        url: 'https://maps.googleapis.com/maps/api/timezone/json?key=TZDB_GOOGLEMAPS_KEY&location=40.1146914%2C-88.3121289&timestamp=1455926050'
+        headers:
+            Host: maps.googleapis.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.1 curl/7.43.0 PHP/7.0.1'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Content-Type: 'application/json; charset=UTF-8'
+            Date: 'Fri, 19 Feb 2016 23:54:10 GMT'
+            Expires: 'Sat, 20 Feb 2016 23:54:10 GMT'
+            Cache-Control: 'public, max-age=86400'
+            Access-Control-Allow-Origin: '*'
+            Server: mafe
+            X-XSS-Protection: '1; mode=block'
+            X-Frame-Options: SAMEORIGIN
+            Alternate-Protocol: '443:quic,p=1'
+            Alt-Svc: 'quic=":443"; ma=2592000; v="30,29,28,27,26,25"'
+            Accept-Ranges: none
+            Vary: Accept-Encoding
+            Transfer-Encoding: chunked
+        body: "{\n   \"dstOffset\" : 0,\n   \"rawOffset\" : -21600,\n   \"status\" : \"OK\",\n   \"timeZoneId\" : \"America/Chicago\",\n   \"timeZoneName\" : \"Central Standard Time\"\n}\n"
+-
+    request:
+        method: GET
+        url: 'https://maps.googleapis.com/maps/api/timezone/json?location=40.1146914%2C-88.3121289&timestamp=1455926233'
+        headers:
+            Host: maps.googleapis.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.1 curl/7.43.0 PHP/7.0.1'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Content-Type: 'application/json; charset=UTF-8'
+            Date: 'Fri, 19 Feb 2016 23:57:13 GMT'
+            Expires: 'Sat, 20 Feb 2016 23:57:13 GMT'
+            Cache-Control: 'public, max-age=86400'
+            Access-Control-Allow-Origin: '*'
+            Server: mafe
+            X-XSS-Protection: '1; mode=block'
+            X-Frame-Options: SAMEORIGIN
+            Alternate-Protocol: '443:quic,p=1'
+            Alt-Svc: 'quic=":443"; ma=2592000; v="30,29,28,27,26,25"'
+            Accept-Ranges: none
+            Vary: Accept-Encoding
+            Transfer-Encoding: chunked
+        body: "{\n   \"dstOffset\" : 0,\n   \"rawOffset\" : -21600,\n   \"status\" : \"OK\",\n   \"timeZoneId\" : \"America/Chicago\",\n   \"timeZoneName\" : \"Central Standard Time\"\n}\n"
+-
+    request:
+        method: GET
+        url: 'https://maps.googleapis.com/maps/api/timezone/json?key=TZDB_BAD_KEY&location=40.1146914%2C-88.3121289&timestamp=1455926050'
+        headers:
+            Host: maps.googleapis.com
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.1.1 curl/7.43.0 PHP/7.0.1'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Content-Type: 'application/json; charset=UTF-8'
+            Date: 'Sat, 20 Feb 2016 00:01:33 GMT'
+            Pragma: no-cache
+            Expires: 'Fri, 01 Jan 1990 00:00:00 GMT'
+            Cache-Control: 'no-cache, must-revalidate'
+            Access-Control-Allow-Origin: '*'
+            Server: mafe
+            X-XSS-Protection: '1; mode=block'
+            X-Frame-Options: SAMEORIGIN
+            Alternate-Protocol: '443:quic,p=1'
+            Alt-Svc: 'quic=":443"; ma=2592000; v="30,29,28,27,26,25"'
+            Accept-Ranges: none
+            Vary: Accept-Encoding
+            Transfer-Encoding: chunked
+        body: "{\n   \"errorMessage\" : \"The provided API key is invalid.\",\n   \"status\" : \"REQUEST_DENIED\"\n}\n"
