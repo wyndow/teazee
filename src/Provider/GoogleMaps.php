@@ -88,7 +88,7 @@ class GoogleMaps extends AbstractHttpProvider
             'id'        => $data->timeZoneId,
             'dst'       => $data->dstOffset !== 0,
             'timestamp' => $timestamp,
-            'utcOffset' => $data->rawOffset,
+            'utcOffset' => $data->rawOffset + $data->dstOffset,
         ]));
     }
 

@@ -2,6 +2,8 @@
 
 namespace Teazee\Spec\Provider;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as HttpAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
@@ -40,11 +42,18 @@ describe(GoogleMaps::class, function () {
         });
     });
 
-    context('with coordinates and timestamp', function () {
+    context('CST', function () {
+        before(function () {
+            $this->date = new DateTimeImmutable('2016-02-21', new DateTimeZone('UTC'));
+        });
 
         beforeEach(function () {
-            $this->time = 1455926050;
-            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->time);
+            $this->teazee = new GoogleMaps(
+                null,
+                new HttpAdapter(new Client()),
+                new GuzzleMessageFactory()
+            );
+            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
         });
 
         it('->find() returns a TimeZone', function () {
@@ -52,11 +61,46 @@ describe(GoogleMaps::class, function () {
         });
 
         it('->find() returns with the given timestamp', function () {
-            expect($this->tz->getTimestamp())->toBe($this->time);
+            expect($this->tz->getTimestamp())->toBe($this->date->getTimestamp());
+        });
+
+        it('->find() returns utc offset', function () {
+            expect($this->tz->getUtcOffset())->toBe(-21600);
         });
 
         it('->find() knows if isDst', function () {
             expect($this->tz->isDst())->toBe(false);
+        });
+    });
+
+    context('CDT', function () {
+        before(function () {
+            $this->date = new DateTimeImmutable('2016-04-21', new DateTimeZone('UTC'));
+        });
+
+        beforeEach(function () {
+            $this->teazee = new GoogleMaps(
+                null,
+                new HttpAdapter(new Client()),
+                new GuzzleMessageFactory()
+            );
+            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
+        });
+
+        it('->find() returns a TimeZone', function () {
+            expect($this->tz)->toBeAnInstanceOf(ZoneInfo::class);
+        });
+
+        it('->find() returns with the given timestamp', function () {
+            expect($this->tz->getTimestamp())->toBe($this->date->getTimestamp());
+        });
+
+        it('->find() returns utc offset', function () {
+            expect($this->tz->getUtcOffset())->toBe(-18000);
+        });
+
+        it('->find() knows if isDst', function () {
+            expect($this->tz->isDst())->toBe(true);
         });
     });
 
