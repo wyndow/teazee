@@ -22,7 +22,7 @@ describe(GoogleMaps::class, function () {
 
     beforeEach(function () {
         $this->teazee = new GoogleMaps(
-            'TZDB_GOOGLEMAPS_KEY',
+            null,
             new HttpAdapter(new Client()),
             new GuzzleMessageFactory()
         );
@@ -34,73 +34,57 @@ describe(GoogleMaps::class, function () {
 
     context('without discovery', function () {
         it('fails without an HttpClient', function () {
-            expect(function () { new GoogleMaps('SOME_API_KEY'); })->toThrow();
+            expect(function () { new GoogleMaps(); })->toThrow();
         });
 
         it('fails without a MessageFactory', function () {
-            expect(function () { new GoogleMaps('SOME_API_KEY', new HttpAdapter(new Client())); })->toThrow();
+            expect(function () { new GoogleMaps(null, new HttpAdapter(new Client())); })->toThrow();
         });
     });
 
     context('CST', function () {
         before(function () {
             $this->date = new DateTimeImmutable('2016-02-21', new DateTimeZone('UTC'));
-        });
-
-        beforeEach(function () {
-            $this->teazee = new GoogleMaps(
-                null,
-                new HttpAdapter(new Client()),
-                new GuzzleMessageFactory()
-            );
-            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
+            $this->zone = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
         });
 
         it('->find() returns a TimeZone', function () {
-            expect($this->tz)->toBeAnInstanceOf(ZoneInfo::class);
+            expect($this->zone)->toBeAnInstanceOf(ZoneInfo::class);
         });
 
         it('->find() returns with the given timestamp', function () {
-            expect($this->tz->getTimestamp())->toBe($this->date->getTimestamp());
+            expect($this->zone->getTimestamp())->toBe($this->date->getTimestamp());
         });
 
         it('->find() returns utc offset', function () {
-            expect($this->tz->getUtcOffset())->toBe(-21600);
+            expect($this->zone->getUtcOffset())->toBe(-21600);
         });
 
-        it('->find() knows if isDst', function () {
-            expect($this->tz->isDst())->toBe(false);
+        it('->find() is dst', function () {
+            expect($this->zone->isDst())->toBe(false);
         });
     });
 
     context('CDT', function () {
         before(function () {
             $this->date = new DateTimeImmutable('2016-04-21', new DateTimeZone('UTC'));
-        });
-
-        beforeEach(function () {
-            $this->teazee = new GoogleMaps(
-                null,
-                new HttpAdapter(new Client()),
-                new GuzzleMessageFactory()
-            );
-            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
+            $this->zone = $this->teazee->find($this->lat, $this->lng, $this->date->getTimestamp());
         });
 
         it('->find() returns a TimeZone', function () {
-            expect($this->tz)->toBeAnInstanceOf(ZoneInfo::class);
+            expect($this->zone)->toBeAnInstanceOf(ZoneInfo::class);
         });
 
         it('->find() returns with the given timestamp', function () {
-            expect($this->tz->getTimestamp())->toBe($this->date->getTimestamp());
+            expect($this->zone->getTimestamp())->toBe($this->date->getTimestamp());
         });
 
-        it('->find() returns utc offset', function () {
-            expect($this->tz->getUtcOffset())->toBe(-18000);
+        it('->find() returns adjusted utc offset', function () {
+            expect($this->zone->getUtcOffset())->toBe(-18000);
         });
 
-        it('->find() knows if isDst', function () {
-            expect($this->tz->isDst())->toBe(true);
+        it('->find() is dst', function () {
+            expect($this->zone->isDst())->toBe(true);
         });
     });
 
@@ -108,12 +92,12 @@ describe(GoogleMaps::class, function () {
 
         it('fails with an invalid API key', function () {
             $expected = function () {
-                $this->teazee = new GoogleMaps(
-                    'TZDB_BAD_KEY',
+                (new GoogleMaps(
+                    'TEAZEE_BAD_KEY',
                     new HttpAdapter(new Client()),
                     new GuzzleMessageFactory()
-                );
-                $this->teazee->find($this->lat, $this->lng, 1455926050);
+                ))
+                ->find($this->lat, $this->lng, 1455926050);
             };
 
             expect($expected)

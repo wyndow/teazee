@@ -31,7 +31,7 @@
 -
     request:
         method: GET
-        url: 'https://maps.googleapis.com/maps/api/timezone/json?key=TZDB_BAD_KEY&location=40.1146914%2C-88.3121289&timestamp=1455926050'
+        url: 'https://maps.googleapis.com/maps/api/timezone/json?key=TEAZEE_BAD_KEY&location=40.1146914%2C-88.3121289&timestamp=1455926050'
         headers:
             Host: maps.googleapis.com
             Accept-Encoding: null
