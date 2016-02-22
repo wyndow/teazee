@@ -9,6 +9,8 @@
  */
 namespace Teazee\Provider;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Teazee\Model\ZoneInfo;
 use Teazee\Model\ZoneInfoFactory;
 
@@ -28,6 +30,16 @@ abstract class AbstractProvider implements Provider
     public function __construct()
     {
         $this->factory = new ZoneInfoFactory();
+    }
+
+    /**
+     * Returns the current time as seconds since January 1, 1970 UTC.
+     *
+     * @return int
+     */
+    protected function getCurrentTimestamp()
+    {
+        return (new DateTimeImmutable(null, new DateTimeZone('UTC')))->getTimestamp();
     }
 
     /**

@@ -147,5 +147,23 @@ describe(ZoneInfoFactory::class, function () {
                 expect($this->tz->getDateTime()->format('Y-m-d H:i:s'))->toBe('2015-11-02 08:00:00');
             });
         });
+
+        context('when DST false', function () {
+            before(function () {
+                $this->values = $this->values + [
+                    'dst'       => false,
+                    'utcOffset' => -28800,
+                    'timestamp' => 1446480000,
+                ];
+            });
+
+            beforeEach(function () {
+                $this->tz = $this->factory->create($this->values);
+            });
+
+            it('->isDst()', function () {
+                expect($this->tz->isDst())->toBe(false);
+            });
+        });
     });
 });

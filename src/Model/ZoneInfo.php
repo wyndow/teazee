@@ -55,7 +55,7 @@ final class ZoneInfo extends DateTimeZone
     {
         parent::__construct($timezone);
 
-        $this->dst = $dst ? (bool) $dst : null;
+        $this->dst = isset($dst) ? (bool) $dst : null;
         $this->utcOffset = $utcOffset ? (int) $utcOffset : null;
         $this->timestamp = $timestamp ? (int) $timestamp : null;
         $this->country = $country ?: $this->getLocation()['country_code'];
