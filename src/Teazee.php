@@ -9,8 +9,6 @@
  */
 namespace Teazee;
 
-use Teazee\Model\ZoneInfo;
-
 /**
  * @author Michael Crumm <mike@crumm.net>
  */

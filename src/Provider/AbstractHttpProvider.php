@@ -38,8 +38,6 @@ abstract class AbstractHttpProvider extends AbstractProvider
      */
     public function __construct(HttpClient $client = null, MessageFactory $messageFactory = null)
     {
-        parent::__construct();
-
         if (null === $client && !class_exists('Http\Discovery\HttpClientDiscovery')) {
             throw ServiceMissingException::noHttpClient();
         }

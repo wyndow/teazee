@@ -7,8 +7,8 @@ use Http\Adapter\Guzzle6\Client as ClientAdapter;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use RuntimeException;
-use Teazee\Model\ZoneInfo;
 use Teazee\Provider\TimeZoneDB;
+use Teazee\ZoneInfo;
 use VCR\VCR;
 
 describe(TimeZoneDB::class, function () {
@@ -61,10 +61,20 @@ describe(TimeZoneDB::class, function () {
     });
 
     context('with coordinates and timestamp', function () {
-        it('->find() can take an optional timestamp', function () {
-            $this->tz = $this->teazee->find($this->lat, $this->lng, 1446296400);
+        before(function () {
+            $this->ts = 1446296400;
+        });
 
+        beforeEach(function () {
+            $this->tz = $this->teazee->find($this->lat, $this->lng, $this->ts);
+        });
+
+        it('->find() can take an optional timestamp', function () {
             expect($this->tz->isDst())->toBe(true);
+        });
+
+        it(ZoneInfo::class.' contains the given timestamp', function () {
+            expect($this->tz->getTimestamp())->toBe($this->ts);
         });
     });
 

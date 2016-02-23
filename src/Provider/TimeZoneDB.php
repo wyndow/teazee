@@ -12,7 +12,7 @@ namespace Teazee\Provider;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use RuntimeException;
-use Teazee\Model\ZoneInfo;
+use Teazee\ZoneInfo;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -71,13 +71,7 @@ class TimeZoneDB extends AbstractHttpProvider
             throw new RuntimeException($data->message);
         }
 
-        return $this->returnResult(array_merge($this->getDefaults(), [
-            'id'        => $data->zoneName,
-            'dst'       => (bool) $data->dst,
-            'timestamp' => $data->timestamp - $data->gmtOffset,
-            'utcOffset' => $data->gmtOffset,
-            'country'   => $data->countryCode,
-        ]));
+        return new ZoneInfo($data->zoneName, $data->timestamp - $data->gmtOffset);
     }
 
     /**
@@ -85,7 +79,7 @@ class TimeZoneDB extends AbstractHttpProvider
      *
      * @param string|float $lat       Coordinate latitude.
      * @param string|float $lng       Coordinate longitude.
-     * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
      *
      * @return string
      */
