@@ -22,6 +22,7 @@ describe(TimeZoneDB::class, function () {
     beforeEach(function () {
         $this->teazee = new TimeZoneDB(
             'TVDB_TEAZEE_KEY',
+            false,
             new ClientAdapter(new Client()),
             new GuzzleMessageFactory()
         );
@@ -41,7 +42,7 @@ describe(TimeZoneDB::class, function () {
         });
 
         it('fails without a MessageFactory', function () {
-            expect(function () { new TimeZoneDB('SOME_API_KEY', new ClientAdapter(new Client())); })->toThrow();
+            expect(function () { new TimeZoneDB('SOME_API_KEY', false, new ClientAdapter(new Client())); })->toThrow();
         });
     });
 
@@ -84,6 +85,7 @@ describe(TimeZoneDB::class, function () {
             $expected = function () {
                 $this->teazee = new TimeZoneDB(
                     '',
+                    false,
                     new ClientAdapter(new Client()),
                     new GuzzleMessageFactory()
                 );
@@ -98,6 +100,7 @@ describe(TimeZoneDB::class, function () {
             $expected = function () {
                 $this->teazee = new TimeZoneDB(
                     'TEAZEE_BAD_KEY',
+                    false,
                     new ClientAdapter(new Client()),
                     new GuzzleMessageFactory()
                 );
