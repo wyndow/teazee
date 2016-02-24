@@ -8,8 +8,8 @@ use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as HttpAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use RuntimeException;
-use Teazee\Model\ZoneInfo;
 use Teazee\Provider\GoogleMaps;
+use Teazee\ZoneInfo;
 use VCR\VCR;
 
 describe(GoogleMaps::class, function () {
@@ -102,6 +102,29 @@ describe(GoogleMaps::class, function () {
 
             expect($expected)
                 ->toThrow(new RuntimeException('The provided API key is invalid.'));
+        });
+    });
+
+    context('when no timestamp given', function () {
+        before(function () {
+            VCR::turnOff();
+        });
+
+        beforeEach(function () {
+            $this->now = (new DateTimeImmutable(null, new DateTimeZone('UTC')))->getTimestamp();
+            $this->time = $this->teazee->find($this->lat, $this->lng)->getTimestamp();
+        });
+
+        it('uses the default timestamp', function () {
+            // Note: this _could_ fail if response times are especially bad, but it's google,
+            // so we'll take out chances.
+            expect($this->time)->toBeGreaterThan($this->now - 1);
+            expect($this->time)->toBeLessThan($this->now + 3);
+        });
+
+        after(function () {
+            VCR::turnOn();
+            VCR::insertCassette('googlemaps');
         });
     });
 

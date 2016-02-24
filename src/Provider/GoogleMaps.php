@@ -12,7 +12,7 @@ namespace Teazee\Provider;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use RuntimeException;
-use Teazee\Model\ZoneInfo;
+use Teazee\ZoneInfo;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -74,6 +74,7 @@ class GoogleMaps extends AbstractHttpProvider
      */
     public function find($lat, $lng, $timestamp = null)
     {
+        // Google Maps TimeZone API requires a timestamp.
         $timestamp = $timestamp ?: $this->getCurrentTimestamp();
         $query = $this->buildQuery($lat, $lng, $timestamp);
         $response = $this->getResponse($query);
@@ -84,12 +85,7 @@ class GoogleMaps extends AbstractHttpProvider
             throw new RuntimeException($message);
         }
 
-        return $this->returnResult(array_merge($this->getDefaults(), [
-            'id'        => $data->timeZoneId,
-            'dst'       => $data->dstOffset !== 0,
-            'timestamp' => $timestamp,
-            'utcOffset' => $data->rawOffset + $data->dstOffset,
-        ]));
+        return new ZoneInfo($data->timeZoneId, $timestamp);
     }
 
     /**
@@ -97,7 +93,7 @@ class GoogleMaps extends AbstractHttpProvider
      *
      * @param string|float $lat       Coordinate latitude.
      * @param string|float $lng       Coordinate longitude.
-     * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
      *
      * @return string
      */
