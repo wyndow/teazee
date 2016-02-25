@@ -17,7 +17,7 @@ use Teazee\ZoneInfo;
 /**
  * @author Michael Crumm <mike@crumm.net>
  */
-class TimeZoneDB extends AbstractHttpProvider
+class TimezoneDb extends AbstractHttpProvider
 {
     const ENDPOINT = 'https://api.timezonedb.com/';
     const VIP_ENDPOINT = 'https://vip.timezonedb.com/';
