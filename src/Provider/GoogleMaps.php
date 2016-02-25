@@ -58,7 +58,7 @@ class GoogleMaps extends AbstractHttpProvider
      */
     public function getName()
     {
-        return 'googlemaps';
+        return 'google_maps';
     }
 
     /**
@@ -76,16 +76,15 @@ class GoogleMaps extends AbstractHttpProvider
     {
         // Google Maps TimeZone API requires a timestamp.
         $timestamp = $timestamp ?: $this->getCurrentTimestamp();
-        $query = $this->buildQuery($lat, $lng, $timestamp);
-        $response = $this->getResponse($query);
-        $data = json_decode($response->getBody()->getContents());
 
-        if (in_array($data->status, $this->errorStatus)) {
-            $message = isset($data->errorMessage) ? $data->errorMessage : $data->status;
+        $result = $this->getResult($lat, $lng, $timestamp);
+
+        if (in_array($result->status, $this->errorStatus)) {
+            $message = isset($result->errorMessage) ? $result->errorMessage : $result->status;
             throw new RuntimeException($message);
         }
 
-        return new ZoneInfo($data->timeZoneId, $timestamp);
+        return new ZoneInfo($result->timeZoneId, $timestamp);
     }
 
     /**
@@ -97,7 +96,7 @@ class GoogleMaps extends AbstractHttpProvider
      *
      * @return string
      */
-    private function buildQuery($lat, $lng, $timestamp)
+    protected function buildUri($lat, $lng, $timestamp = null)
     {
         $params = [
             'key'       => $this->apiKey,

@@ -3,8 +3,7 @@
 namespace Teazee\Spec\Provider;
 
 use GuzzleHttp\Client;
-use Http\Adapter\Guzzle6\Client as ClientAdapter;
-use Http\Client\HttpClient;
+use Http\Adapter\Guzzle6\Client as HttpAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use RuntimeException;
 use Teazee\Provider\TimeZoneDB;
@@ -14,7 +13,7 @@ use VCR\VCR;
 describe(TimeZoneDB::class, function () {
 
     before(function () {
-        VCR::insertCassette('timezonedb');
+        VCR::insertCassette('timezone_db');
         $this->lat = 40.1146914;
         $this->lng = -88.3121289;
     });
@@ -23,17 +22,13 @@ describe(TimeZoneDB::class, function () {
         $this->teazee = new TimeZoneDB(
             'TVDB_TEAZEE_KEY',
             false,
-            new ClientAdapter(new Client()),
+            new HttpAdapter(new Client()),
             new GuzzleMessageFactory()
         );
     });
 
     it('->getName()', function () {
-        expect($this->teazee->getName())->toBe('timezonedb');
-    });
-
-    it('->getClient()', function () {
-        expect($this->teazee->getClient())->toBeAnInstanceOf(HttpClient::class);
+        expect($this->teazee->getName())->toBe('timezone_db');
     });
 
     context('without discovery', function () {
@@ -42,7 +37,7 @@ describe(TimeZoneDB::class, function () {
         });
 
         it('fails without a MessageFactory', function () {
-            expect(function () { new TimeZoneDB('SOME_API_KEY', false, new ClientAdapter(new Client())); })->toThrow();
+            expect(function () { new TimeZoneDB('SOME_API_KEY', false, new HttpAdapter(new Client())); })->toThrow();
         });
     });
 
@@ -86,7 +81,7 @@ describe(TimeZoneDB::class, function () {
                 $this->teazee = new TimeZoneDB(
                     '',
                     false,
-                    new ClientAdapter(new Client()),
+                    new HttpAdapter(new Client()),
                     new GuzzleMessageFactory()
                 );
                 $this->teazee->find($this->lat, $this->lng);
@@ -101,7 +96,7 @@ describe(TimeZoneDB::class, function () {
                 $this->teazee = new TimeZoneDB(
                     'TEAZEE_BAD_KEY',
                     false,
-                    new ClientAdapter(new Client()),
+                    new HttpAdapter(new Client()),
                     new GuzzleMessageFactory()
                 );
                 $this->teazee->find($this->lat, $this->lng);

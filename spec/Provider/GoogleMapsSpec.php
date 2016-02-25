@@ -15,7 +15,7 @@ use VCR\VCR;
 describe(GoogleMaps::class, function () {
 
     before(function () {
-        VCR::insertCassette('googlemaps');
+        VCR::insertCassette('google_maps');
         $this->lat = 40.1146914;
         $this->lng = -88.3121289;
     });
@@ -29,7 +29,7 @@ describe(GoogleMaps::class, function () {
     });
 
     it('->getName()', function () {
-        expect($this->teazee->getName())->toBe('googlemaps');
+        expect($this->teazee->getName())->toBe('google_maps');
     });
 
     context('without discovery', function () {
@@ -117,14 +117,14 @@ describe(GoogleMaps::class, function () {
 
         it('uses the default timestamp', function () {
             // Note: this _could_ fail if response times are especially bad, but it's google,
-            // so we'll take out chances.
+            // so we'll take our chances.
             expect($this->time)->toBeGreaterThan($this->now - 1);
             expect($this->time)->toBeLessThan($this->now + 3);
         });
 
         after(function () {
             VCR::turnOn();
-            VCR::insertCassette('googlemaps');
+            VCR::insertCassette('google_maps');
         });
     });
 
