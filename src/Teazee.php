@@ -22,11 +22,11 @@ interface Teazee
     /**
      * Finds a TimeZone for a location on the surface of the earth.
      *
-     * @param string|float $lat       Latitude coordinate.
-     * @param string|float $lng       Longitude coordinate.
-     * @param int          $timestamp Timestamp used to determine daylight savings time.
+     * @param string|float $lat       Coordinate latitude.
+     * @param string|float $lng       Coordinate longitude.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
      *
      * @return ZoneInfo
      */
-    public function find($lat, $lng, $timestamp);
+    public function find($lat, $lng, $timestamp = null);
 }
