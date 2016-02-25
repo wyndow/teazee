@@ -84,7 +84,7 @@ abstract class AbstractHttpProvider extends AbstractProvider
         $data = json_decode($response->getBody()->getContents());
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException((string)json_last_error_msg());
+            throw new RuntimeException((string) json_last_error_msg());
         }
 
         return $data;
