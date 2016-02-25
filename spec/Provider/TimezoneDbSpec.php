@@ -6,11 +6,11 @@ use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as HttpAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use RuntimeException;
-use Teazee\Provider\TimeZoneDB;
+use Teazee\Provider\TimezoneDb;
 use Teazee\ZoneInfo;
 use VCR\VCR;
 
-describe(TimeZoneDB::class, function () {
+describe(TimezoneDb::class, function () {
 
     before(function () {
         VCR::insertCassette('timezone_db');
@@ -19,7 +19,7 @@ describe(TimeZoneDB::class, function () {
     });
 
     beforeEach(function () {
-        $this->teazee = new TimeZoneDB(
+        $this->teazee = new TimezoneDb(
             'TVDB_TEAZEE_KEY',
             false,
             new HttpAdapter(new Client()),
@@ -33,11 +33,11 @@ describe(TimeZoneDB::class, function () {
 
     context('without discovery', function () {
         it('fails without an HttpClient', function () {
-            expect(function () { new TimeZoneDB('SOME_API_KEY'); })->toThrow();
+            expect(function () { new TimezoneDb('SOME_API_KEY'); })->toThrow();
         });
 
         it('fails without a MessageFactory', function () {
-            expect(function () { new TimeZoneDB('SOME_API_KEY', false, new HttpAdapter(new Client())); })->toThrow();
+            expect(function () { new TimezoneDb('SOME_API_KEY', false, new HttpAdapter(new Client())); })->toThrow();
         });
     });
 
@@ -78,7 +78,7 @@ describe(TimeZoneDB::class, function () {
 
         it('fails without an API key', function () {
             $expected = function () {
-                $this->teazee = new TimeZoneDB(
+                $this->teazee = new TimezoneDb(
                     '',
                     false,
                     new HttpAdapter(new Client()),
@@ -93,7 +93,7 @@ describe(TimeZoneDB::class, function () {
 
         it('fails with a bad API key', function () {
             $expected = function () {
-                $this->teazee = new TimeZoneDB(
+                $this->teazee = new TimezoneDb(
                     'TEAZEE_BAD_KEY',
                     false,
                     new HttpAdapter(new Client()),
