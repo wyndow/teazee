@@ -1,11 +1,61 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16351299611e145a7820f75e72c43b39",
+    "hash": "330d77fc4c3398c1ee0a31dc8558247b",
+    "content-hash": "971137878a66d38a980ecce9cd6411cd",
     "packages": [
+        {
+            "name": "clue/stream-filter",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clue/php-stream-filter.git",
+                "reference": "e3bf9415da163d9ad6701dccb407ed501ae69785"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clue/php-stream-filter/zipball/e3bf9415da163d9ad6701dccb407ed501ae69785",
+                "reference": "e3bf9415da163d9ad6701dccb407ed501ae69785",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Clue\\StreamFilter\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@lueck.tv"
+                }
+            ],
+            "description": "A simple and modern approach to stream filtering in PHP",
+            "homepage": "https://github.com/clue/php-stream-filter",
+            "keywords": [
+                "bucket brigade",
+                "callback",
+                "filter",
+                "php_user_filter",
+                "stream",
+                "stream_filter_append",
+                "stream_filter_register"
+            ],
+            "time": "2015-11-08 23:41:30"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.1.1",
@@ -121,16 +171,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.1",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
-                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
                 "shasum": ""
             },
             "require": {
@@ -175,7 +225,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-11-03 01:34:55"
+            "time": "2016-02-18 21:54:00"
         },
         {
             "name": "igorw/get-in",
@@ -223,143 +273,23 @@
             "time": "2014-12-15 23:03:51"
         },
         {
-            "name": "php-http/client-tools",
-            "version": "v0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-http/client-tools.git",
-                "reference": "cf379dded903642862300b08f6c21cfbe052c430"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-tools/zipball/cf379dded903642862300b08f6c21cfbe052c430",
-                "reference": "cf379dded903642862300b08f6c21cfbe052c430",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "php-http/promise": "^0.1"
-            },
-            "require-dev": {
-                "henrikbjorn/phpspec-code-coverage": "^1.0",
-                "php-http/httplug": "1.0.0-alpha3",
-                "phpspec/phpspec": "^2.4@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Http\\Client\\Tools\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                }
-            ],
-            "description": "Tools for HTTPlug client implementors",
-            "homepage": "http://httplug.io",
-            "keywords": [
-                "client",
-                "http",
-                "httplug",
-                "tools"
-            ],
-            "abandoned": "php-http/client-common",
-            "time": "2015-12-15 15:48:50"
-        },
-        {
-            "name": "php-http/discovery",
-            "version": "0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-http/discovery.git",
-                "reference": "9b16b3e2d0aa2b828bca5a462bc868f50715efbf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/9b16b3e2d0aa2b828bca5a462bc868f50715efbf",
-                "reference": "9b16b3e2d0aa2b828bca5a462bc868f50715efbf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "php-http/message-factory": "~0.2@dev"
-            },
-            "require-dev": {
-                "guzzlehttp/psr7": "^1.0",
-                "henrikbjorn/phpspec-code-coverage": "^1.0",
-                "phpspec/phpspec": "^2.2",
-                "zendframework/zend-diactoros": "^1.0"
-            },
-            "suggest": {
-                "guzzlehttp/psr7": "Used with Guzzle PSR-7 MessageFactory",
-                "zendframework/zend-diactoros": "Used with Diactoros MessageFactory"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Http\\Discovery\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                },
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                }
-            ],
-            "description": "Finds installed adapters and message factories",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "adapter",
-                "discovery",
-                "factory",
-                "http",
-                "message"
-            ],
-            "time": "2015-10-31 17:33:42"
-        },
-        {
             "name": "php-http/guzzle6-adapter",
-            "version": "v0.2.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/guzzle6-adapter.git",
-                "reference": "fd6971aa9bb68150af87c2da7d18730efcbe2bf4"
+                "reference": "e884cf6dae5235fffd2a07f761e0066b9ebef170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/guzzle6-adapter/zipball/fd6971aa9bb68150af87c2da7d18730efcbe2bf4",
-                "reference": "fd6971aa9bb68150af87c2da7d18730efcbe2bf4",
+                "url": "https://api.github.com/repos/php-http/guzzle6-adapter/zipball/e884cf6dae5235fffd2a07f761e0066b9ebef170",
+                "reference": "e884cf6dae5235fffd2a07f761e0066b9ebef170",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0",
                 "php": ">=5.5.0",
-                "php-http/client-tools": "^0.1",
-                "php-http/httplug": "1.0.0-alpha3"
+                "php-http/httplug": "^1.0"
             },
             "provide": {
                 "php-http/async-client-implementation": "1.0",
@@ -367,17 +297,17 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "php-http/adapter-integration-tests": "dev-master"
+                "php-http/adapter-integration-tests": "^0.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Http\\Adapter\\": "src/"
+                    "Http\\Adapter\\Guzzle6\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -400,25 +330,25 @@
                 "Guzzle",
                 "http"
             ],
-            "time": "2015-12-15 16:46:17"
+            "time": "2016-01-26 20:39:00"
         },
         {
             "name": "php-http/httplug",
-            "version": "v1.0.0-alpha3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/httplug.git",
-                "reference": "38441d6dc0a460d0c2ba477a8594f5951bdff97c"
+                "reference": "2061047ca53a08a6b8f52e997b2a76f386b397dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/httplug/zipball/38441d6dc0a460d0c2ba477a8594f5951bdff97c",
-                "reference": "38441d6dc0a460d0c2ba477a8594f5951bdff97c",
+                "url": "https://api.github.com/repos/php-http/httplug/zipball/2061047ca53a08a6b8f52e997b2a76f386b397dd",
+                "reference": "2061047ca53a08a6b8f52e997b2a76f386b397dd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4",
-                "php-http/promise": "^0.1",
+                "php-http/promise": "^1.0",
                 "psr/http-message": "^1.0"
             },
             "require-dev": {
@@ -428,7 +358,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -456,20 +386,86 @@
                 "client",
                 "http"
             ],
-            "time": "2015-12-13 11:55:42"
+            "time": "2016-01-26 14:34:50"
         },
         {
-            "name": "php-http/message-factory",
-            "version": "v0.3.0",
+            "name": "php-http/message",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-http/message-factory.git",
-                "reference": "1b9f81dca6dd58a41d7dd8c6ce298ffcd1f03007"
+                "url": "https://github.com/php-http/message.git",
+                "reference": "24f87eb1e913bd8d548b6571be584492d95b0f02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message-factory/zipball/1b9f81dca6dd58a41d7dd8c6ce298ffcd1f03007",
-                "reference": "1b9f81dca6dd58a41d7dd8c6ce298ffcd1f03007",
+                "url": "https://api.github.com/repos/php-http/message/zipball/24f87eb1e913bd8d548b6571be584492d95b0f02",
+                "reference": "24f87eb1e913bd8d548b6571be584492d95b0f02",
+                "shasum": ""
+            },
+            "require": {
+                "clue/stream-filter": "^1.3",
+                "php": ">=5.4",
+                "php-http/message-factory": "^1.0.2",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "coduo/phpspec-data-provider-extension": "^1.0",
+                "ext-zlib": "*",
+                "guzzlehttp/psr7": "^1.0",
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.4",
+                "zendframework/zend-diactoros": "^1.0"
+            },
+            "suggest": {
+                "ext-zlib": "Used with compressor/decompressor streams",
+                "guzzlehttp/psr7": "Used with Guzzle PSR-7 Factories",
+                "zendframework/zend-diactoros": "Used with Diactoros Factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Message\\": "src/"
+                },
+                "files": [
+                    "src/filters.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "HTTP Message related tools",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "http",
+                "message",
+                "psr-7"
+            ],
+            "time": "2016-01-27 11:42:19"
+        },
+        {
+            "name": "php-http/message-factory",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/message-factory.git",
+                "reference": "a478cb11f66a6ac48d8954216cfed9aa06a501a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/message-factory/zipball/a478cb11f66a6ac48d8954216cfed9aa06a501a1",
+                "reference": "a478cb11f66a6ac48d8954216cfed9aa06a501a1",
                 "shasum": ""
             },
             "require": {
@@ -479,7 +475,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -506,24 +502,21 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-11-16 13:02:33"
+            "time": "2015-12-19 14:08:53"
         },
         {
             "name": "php-http/promise",
-            "version": "v0.1.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/promise.git",
-                "reference": "63c930a02f68800669a4375c61845a853197b7dc"
+                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/promise/zipball/63c930a02f68800669a4375c61845a853197b7dc",
-                "reference": "63c930a02f68800669a4375c61845a853197b7dc",
+                "url": "https://api.github.com/repos/php-http/promise/zipball/dc494cdc9d7160b9a09bd5573272195242ce7980",
+                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980",
                 "shasum": ""
-            },
-            "require": {
-                "psr/http-message": "^1.0"
             },
             "require-dev": {
                 "henrikbjorn/phpspec-code-coverage": "^1.0",
@@ -532,7 +525,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -559,7 +552,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2015-12-24 23:03:22"
+            "time": "2016-01-26 13:27:02"
         },
         {
             "name": "psr/http-message",
@@ -666,230 +659,21 @@
             "time": "2015-08-21 16:50:17"
         },
         {
-            "name": "crysalead/box",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/box.git",
-                "reference": "ce41d70230a06aa7e33c82bb318e0f703f323f46"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/box/zipball/ce41d70230a06aa7e33c82bb318e0f703f323f46",
-                "reference": "ce41d70230a06aa7e33c82bb318e0f703f323f46",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "box\\": "src/"
-                },
-                "files": [
-                    "src/init.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Minimalist Dependency Injection Container.",
-            "keywords": [
-                "dependency injection",
-                "dependency injection container",
-                "inversion of control",
-                "ioc"
-            ],
-            "time": "2015-11-23 18:03:45"
-        },
-        {
-            "name": "crysalead/code",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/code.git",
-                "reference": "711c744d4202b2bc86687fac9e26f11e83bbfba8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/code/zipball/711c744d4202b2bc86687fac9e26f11e83bbfba8",
-                "reference": "711c744d4202b2bc86687fac9e26f11e83bbfba8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "code\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "CrysaLEAD"
-                }
-            ],
-            "description": "Runs callables with a timeout",
-            "keywords": [
-                "timeout"
-            ],
-            "time": "2015-11-24 17:12:22"
-        },
-        {
-            "name": "crysalead/dir",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/dir.git",
-                "reference": "2f458faadc0089a62fc7e063fc80c55d055c06ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/dir/zipball/2f458faadc0089a62fc7e063fc80c55d055c06ed",
-                "reference": "2f458faadc0089a62fc7e063fc80c55d055c06ed",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "dir\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Recursive directory scanner to locate directories and/or files in a file system",
-            "keywords": [
-                "Directory Scanner",
-                "directory",
-                "file",
-                "file system"
-            ],
-            "time": "2015-11-24 17:00:39"
-        },
-        {
-            "name": "crysalead/filter",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/filter.git",
-                "reference": "7a95a38cd3497107645ea60786ff7f30b96c00e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/filter/zipball/7a95a38cd3497107645ea60786ff7f30b96c00e1",
-                "reference": "7a95a38cd3497107645ea60786ff7f30b96c00e1",
-                "shasum": ""
-            },
-            "require": {
-                "crysalead/jit": "~1.0",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "filter\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "CrysaLEAD"
-                }
-            ],
-            "description": "Method filtering system",
-            "keywords": [
-                "aop",
-                "aspect",
-                "aspect programming",
-                "method filtering"
-            ],
-            "time": "2015-11-24 17:03:23"
-        },
-        {
-            "name": "crysalead/jit",
-            "version": "1.0.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crysalead/jit.git",
-                "reference": "2ae622b01e0603982543d28ad3fd9ebf5b6b3ec7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/jit/zipball/2ae622b01e0603982543d28ad3fd9ebf5b6b3ec7",
-                "reference": "2ae622b01e0603982543d28ad3fd9ebf5b6b3ec7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "crysalead/kahlan": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "jit\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Just In Time Code Patcher.",
-            "keywords": [
-                "Code Patcher",
-                "jit"
-            ],
-            "time": "2015-11-24 17:29:39"
-        },
-        {
             "name": "crysalead/kahlan",
-            "version": "1.2.11",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crysalead/kahlan.git",
-                "reference": "17054d0db5b96d71d2886ab6d2044611ca3bb61a"
+                "reference": "b3d1669a9b79151a98a94c2c80c384a821f1899d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/17054d0db5b96d71d2886ab6d2044611ca3bb61a",
-                "reference": "17054d0db5b96d71d2886ab6d2044611ca3bb61a",
+                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/b3d1669a9b79151a98a94c2c80c384a821f1899d",
+                "reference": "b3d1669a9b79151a98a94c2c80c384a821f1899d",
                 "shasum": ""
             },
             "require": {
-                "crysalead/box": "~1.0",
-                "crysalead/code": "~1.1",
-                "crysalead/dir": "~1.0",
-                "crysalead/filter": "~1.1",
-                "crysalead/jit": "~1.0",
-                "php": ">=5.5"
+                "php": ">=5.4"
             },
             "bin": [
                 "bin/kahlan"
@@ -897,7 +681,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "kahlan\\": "src/"
+                    "Kahlan\\": "src/"
                 },
                 "files": [
                     "src/init.php"
@@ -923,27 +707,27 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2015-11-24 22:00:45"
+            "time": "2016-02-18 15:32:52"
         },
         {
             "name": "php-vcr/php-vcr",
-            "version": "1.2.6",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-vcr/php-vcr.git",
-                "reference": "61f6a97aa7f78ccec9a5c2bcc46d151c6c41d646"
+                "reference": "0f1cb3e5537897b88b774fa2918d6c32d7d69139"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-vcr/php-vcr/zipball/61f6a97aa7f78ccec9a5c2bcc46d151c6c41d646",
-                "reference": "61f6a97aa7f78ccec9a5c2bcc46d151c6c41d646",
+                "url": "https://api.github.com/repos/php-vcr/php-vcr/zipball/0f1cb3e5537897b88b774fa2918d6c32d7d69139",
+                "reference": "0f1cb3e5537897b88b774fa2918d6c32d7d69139",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "2.*",
                 "ext-curl": "*",
-                "symfony/event-dispatcher": "~2.1",
-                "symfony/yaml": "2.*"
+                "symfony/event-dispatcher": "~2.1|3.*",
+                "symfony/yaml": "2.*|3.*"
             },
             "require-dev": {
                 "lapistano/proxy-object": "dev-master",
@@ -967,31 +751,31 @@
                 }
             ],
             "description": "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.",
-            "time": "2015-09-29 05:34:56"
+            "time": "2016-01-25 13:30:31"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc"
+                "reference": "4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a5eb815363c0388e83247e7e9853e5dbc14999cc",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa",
+                "reference": "4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.5.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
-                "symfony/dependency-injection": "~2.6|~3.0.0",
-                "symfony/expression-language": "~2.6|~3.0.0",
-                "symfony/stopwatch": "~2.3|~3.0.0"
+                "symfony/config": "~2.8|~3.0",
+                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/expression-language": "~2.8|~3.0",
+                "symfony/stopwatch": "~2.8|~3.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -1000,7 +784,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1027,29 +811,29 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2016-01-27 05:14:46"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966"
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966",
-                "reference": "ac84cbb98b68a6abbc9f5149eb96ccc7b07b8966",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3cf0709d7fe936e97bee9e954382e449003f1d9a",
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.5.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1076,7 +860,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-26 13:37:56"
+            "time": "2016-02-02 13:44:19"
         }
     ],
     "aliases": [],

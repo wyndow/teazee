@@ -1,6 +1,6 @@
 <?php
 
-use filter\Filter;
+use Kahlan\Filter\Filter;
 use VCR\VCR;
 
 $this->args()->argument('reporter', 'default', 'verbose');

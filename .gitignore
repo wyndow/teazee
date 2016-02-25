@@ -1,2 +1,9 @@
+# Composer
 /vendor/
+
+# Spec Coverage
 clover.xml
+
+# Puli
+puli.json
+/.puli/

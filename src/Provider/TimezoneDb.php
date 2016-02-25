@@ -10,14 +10,17 @@
 namespace Teazee\Provider;
 
 use Http\Client\HttpClient;
-use Teazee\Model\ZoneInfo;
+use Http\Message\MessageFactory;
+use RuntimeException;
+use Teazee\ZoneInfo;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
  */
-class TimeZoneDB extends AbstractHttpProvider
+class TimezoneDb extends AbstractHttpProvider
 {
     const ENDPOINT = 'https://api.timezonedb.com/';
+    const VIP_ENDPOINT = 'https://vip.timezonedb.com/';
     const FAIL = 'FAIL';
     const SUCCESS = 'OK';
 
@@ -27,16 +30,28 @@ class TimeZoneDB extends AbstractHttpProvider
     private $apiKey;
 
     /**
+     * @var string
+     */
+    private $host;
+
+    /**
      * TimeZoneDB Constructor.
      *
-     * @param string     $apiKey
-     * @param HttpClient $client
+     * @param string         $apiKey
+     * @param bool           $premium
+     * @param HttpClient     $client
+     * @param MessageFactory $messageFactory
      */
-    public function __construct($apiKey, HttpClient $client = null)
-    {
-        parent::__construct($client);
+    public function __construct(
+        $apiKey,
+        $premium = false,
+        HttpClient $client = null,
+        MessageFactory $messageFactory = null
+    ) {
+        parent::__construct($client, $messageFactory);
 
         $this->apiKey = $apiKey;
+        $this->host = (bool) $premium ? static::VIP_ENDPOINT : static::ENDPOINT;
     }
 
     /**
@@ -46,7 +61,7 @@ class TimeZoneDB extends AbstractHttpProvider
      */
     public function getName()
     {
-        return 'timezonedb';
+        return 'timezone_db';
     }
 
     /**
@@ -60,21 +75,13 @@ class TimeZoneDB extends AbstractHttpProvider
      */
     public function find($lat, $lng, $timestamp = null)
     {
-        $query = $this->buildQuery($lat, $lng, $timestamp);
-        $response = $this->getResponse($query);
-        $data = json_decode($response->getBody()->getContents());
+        $result = $this->getResult($lat, $lng, $timestamp);
 
-        if (static::FAIL === $data->status) {
-            throw new \RuntimeException($data->message);
+        if (static::FAIL === $result->status) {
+            throw new RuntimeException($result->message);
         }
 
-        return $this->returnResult(array_merge($this->getDefaults(), [
-            'id'        => $data->zoneName,
-            'dst'       => (bool) $data->dst,
-            'timestamp' => $data->timestamp - $data->gmtOffset,
-            'utcOffset' => $data->gmtOffset,
-            'country'   => $data->countryCode,
-        ]));
+        return new ZoneInfo($result->zoneName, $result->timestamp - $result->gmtOffset);
     }
 
     /**
@@ -82,11 +89,11 @@ class TimeZoneDB extends AbstractHttpProvider
      *
      * @param string|float $lat       Coordinate latitude.
      * @param string|float $lng       Coordinate longitude.
-     * @param int          $timestamp UNIX timestamp used to determine Daylight Savings Time.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
      *
      * @return string
      */
-    private function buildQuery($lat, $lng, $timestamp = null)
+    protected function buildUri($lat, $lng, $timestamp = null)
     {
         $params = [
             'key'    => $this->apiKey,
@@ -99,6 +106,6 @@ class TimeZoneDB extends AbstractHttpProvider
         // Remove null values.
         $params = array_filter($params);
 
-        return static::ENDPOINT.'?'.http_build_query($params);
+        return $this->host.'?'.http_build_query($params);
     }
 }

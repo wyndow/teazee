@@ -9,8 +9,8 @@
  */
 namespace Teazee\Provider;
 
-use Teazee\Model\ZoneInfo;
-use Teazee\Model\ZoneInfoFactory;
+use DateTimeImmutable;
+use DateTimeZone;
 
 /**
  * @author Michael Crumm <mike@crumm.net>
@@ -18,42 +18,12 @@ use Teazee\Model\ZoneInfoFactory;
 abstract class AbstractProvider implements Provider
 {
     /**
-     * @var ZoneInfoFactory
-     */
-    private $factory;
-
-    /**
-     * AbstractProvider Constructor.
-     */
-    public function __construct()
-    {
-        $this->factory = new ZoneInfoFactory();
-    }
-
-    /**
-     * Returns the default values for creating ZoneInfo.
+     * Returns the current time as seconds since January 1, 1970 UTC.
      *
-     * @return array
+     * @return int
      */
-    protected function getDefaults()
+    protected function getCurrentTimestamp()
     {
-        return [
-            'dst'       => null,
-            'id'        => null,
-            'timestamp' => null,
-            'utcOffset' => null,
-        ];
-    }
-
-    /**
-     * Creates ZoneInfo from the given parameters via the ZoneInfoFactory.
-     *
-     * @param array $data
-     *
-     * @return ZoneInfo
-     */
-    protected function returnResult(array $data)
-    {
-        return $this->factory->create($data);
+        return (new DateTimeImmutable(null, new DateTimeZone('UTC')))->getTimestamp();
     }
 }

@@ -1,12 +1,17 @@
 ## Teazee
 
+[![License](https://img.shields.io/packagist/l/wyndow/teazee.svg?style=flat-square)](https://packagist.org/packages/wyndow/teazee) [![Build Status](https://img.shields.io/travis/wyndow/teazee.svg?style=flat-square)](https://travis-ci.org/wyndow/teazee) [![Code Quality](https://img.shields.io/scrutinizer/g/wyndow/teazee.svg?style=flat-square)](https://scrutinizer-ci.com/g/wyndow/teazee/) [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/wyndow/teazee.svg?style=flat-square)](https://scrutinizer-ci.com/g/wyndow/teazee/) [![Package Version](https://img.shields.io/packagist/v/wyndow/teazee.svg?style=flat-square)](https://packagist.org/packages/wyndow/teazee)
+
 A simple interface to find the timezone and time offset data for a position on the surface of the earth.
+
 
 * [Installation](#installation)
 * [Usage](#usage)
   - [ZoneInfo](#zoneinfo)
   - [Providers](#providers)
-    - [TimeZoneDB](#timezonedb)
+    - [Google Maps](#google-maps)
+    - [TimezoneDb](#timezonedb)
+  - [The Chain Provider](#the-chain-provider)
   - [HTTP Clients](#http-clients)
 * [Extending Things](#extending-things)
 * [Versioning](#versioning)
@@ -28,7 +33,7 @@ Usage
 
 The `Teazee` interface, which all providers implement, exposes a single method:
 
-* `find($lat, $lng, $timestamp)`
+* `find($lat, $lng, $timestamp = null)`
 
 ### ZoneInfo
 
@@ -47,14 +52,49 @@ The `find()` method returns a `ZoneInfo` object, which extends PHP's [`DateTimeZ
 
 Providers perform the black magic for you: talking to the APIs, fetching results, dealing with errors, etc.
 
-#### TimeZoneDB
+#### Google Maps
 
-A valid `apiKey` is required to use the [TimeZoneDB](https://timezonedb.com) provider. You can [register for a free account](https://timezonedb.com/register) to obtain an API key.
+[Get a Key](https://developers.google.com/maps/documentation/timezone/get-api-key)
+
+The [Google Maps TimeZone API](https://developers.google.com/maps/documentation/timezone/intro) will allow you to make a number of calls without authenticating.  
 
 ```php
-$teazee = new \Teazee\Provider\TimeZoneDB($apiKey);
+$teazee = new Teazee\Provider\GoogleMaps(null, $client, $messageFactory);
 ```
 
+When you're ready to use your own API key, pass it as a first argument:
+
+```php
+$teazee = new Teazee\Provider\GoogleMaps($apiKey, $client, $messageFactory);
+```
+
+#### TimeZoneDB
+
+[Get a Key](https://timezonedb.com/register)
+
+A valid `apiKey` is required to use the [TimeZoneDB](https://timezonedb.com) provider.
+
+```php
+$teazee = new Teazee\Provider\TimezoneDb($apiKey, $client, $messageFactory);
+```
+
+If you have a premium account with TimezoneDb, pass `true` as the second argument to use the VIP endpoint.
+
+```php
+$iAmVIP = true;
+$teazee = new Teazee\Provider\TimezoneDb($apiKey, $iAmVIP, $client, $messageFactory);
+```
+
+### The Chain Provider
+
+The Chain provider is a special provider that takes a list of providers and iterates over this list to get a timezone. Note that it **stops** its iteration when a provider returns a result.
+
+```php
+$googleMaps = new Teazee\Provider\GoogleMaps($apiKey, $client, $messageFactory);
+$timezoneDb = new Teazee\Provider\TimezoneDb($apiKey, $isPremium, $client, $messageFactory);
+$teazee = new Teazee\Provider\Chain([$googleMaps, $timezoneDb]);
+$zone = $teazee->find($lat, $lng);
+```
 
 ### HTTP Clients
 
@@ -62,12 +102,29 @@ In order to talk to time zone APIs, you need an HTTP client. Teazee relies on th
 [PSR-7
 Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-7-http-message.md) and attempts to relieve you from worrying too much about its implementation.
 
-You'll be required to include a package that provides an [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation), but the package you choose is up to you. By default, as long as you have a client implementation package included, Teazee will figure out the rest.
+You'll be required to include a package that provides an [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation), but the package you choose is up to you. If you want to let Teazee determine which HTTP classes to use, continue reading about Discovery.
 
 #### Advanced: Discovery
 
-In order to determine the correct client and message factory implementations to use, the `AbstractHttpProvider` will default to using [Http Discovery](https://github.com/php-http/discovery) to find your installed `HttpClient` implementation.  You can override discovery by passing concrete `HttpClient` and `MessageFactory` implementations to the Provider's constructor.
+To keep the number of dependencies on this package manageable, HTTP Discovery is not included by default.
 
+If you'd like to use discovery, you'll need to require the `php-http/discovery` package:
+
+```
+composer require php-http/discovery
+```
+
+Discovery is based on [Puli](http://puli.io), which works best if you include its composer plugin, too:
+
+```
+composer require puli/composer-plugin
+```
+
+With discovery enabled, you can omit the `$client` and `$messageFactory` objects when creating your providers:
+
+```php
+$provider = new Teazee\Provider\TimezoneDb($apiKey); // Client and MessageFactory will be created for you!
+```
 
 Extending Things
 ----------------

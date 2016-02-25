@@ -11,13 +11,16 @@
   "require": {
     "php": ">=5.5",
     "php-http/client-implementation": "1.0",
-    "php-http/discovery": "^0.2.0",
+    "php-http/message": "^1.0.0",
     "igorw/get-in": "^1.0"
   },
   "require-dev": {
-    "php-http/guzzle6-adapter": "0.2.0",
-    "php-vcr/php-vcr": "^1.2.0",
-    "crysalead/kahlan": "~1.2.0"
+    "php-http/guzzle6-adapter": "^1.0.0",
+    "php-vcr/php-vcr": "^1.2.7",
+    "crysalead/kahlan": "^2.0.1"
+  },
+  "suggest": {
+    "php-http/discovery": "Allows Teazee to find an appropriate HTTP Client"
   },
   "autoload": {
     "psr-4": { "Teazee\\": "src/" }
@@ -32,8 +35,8 @@
   "minimum-stability": "dev",
   "extra": {
     "branch-alias": {
-      "dev-master": "0.2-dev",
-      "dev-develop": "0.3-dev"
+      "dev-master": "0.3-dev",
+      "dev-develop": "0.4-dev"
     }
   }
 }
