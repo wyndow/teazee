@@ -61,7 +61,7 @@ class TimeZoneDB extends AbstractHttpProvider
      */
     public function getName()
     {
-        return 'timezonedb';
+        return 'timezone_db';
     }
 
     /**
@@ -75,15 +75,13 @@ class TimeZoneDB extends AbstractHttpProvider
      */
     public function find($lat, $lng, $timestamp = null)
     {
-        $query = $this->buildQuery($lat, $lng, $timestamp);
-        $response = $this->getResponse($query);
-        $data = json_decode($response->getBody()->getContents());
+        $result = $this->getResult($lat, $lng, $timestamp);
 
-        if (static::FAIL === $data->status) {
-            throw new RuntimeException($data->message);
+        if (static::FAIL === $result->status) {
+            throw new RuntimeException($result->message);
         }
 
-        return new ZoneInfo($data->zoneName, $data->timestamp - $data->gmtOffset);
+        return new ZoneInfo($result->zoneName, $result->timestamp - $result->gmtOffset);
     }
 
     /**
@@ -95,7 +93,7 @@ class TimeZoneDB extends AbstractHttpProvider
      *
      * @return string
      */
-    private function buildQuery($lat, $lng, $timestamp = null)
+    protected function buildUri($lat, $lng, $timestamp = null)
     {
         $params = [
             'key'    => $this->apiKey,

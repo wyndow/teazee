@@ -13,6 +13,7 @@ use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 use Teazee\Exception\ServiceMissingException;
 
 /**
@@ -52,16 +53,6 @@ abstract class AbstractHttpProvider extends AbstractProvider
     }
 
     /**
-     * Returns the HttpClient instance for this Provider.
-     *
-     * @return HttpClient
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
      * Returns a ResponseInterface for the given URI/method.
      *
      * @param string|UriInterface $uri    Request URI.
@@ -75,4 +66,38 @@ abstract class AbstractHttpProvider extends AbstractProvider
 
         return $this->client->sendRequest($request);
     }
+
+    /**
+     * @param string|float $lat       Coordinate latitude.
+     * @param string|float $lng       Coordinate longitude.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
+     *
+     * @throws RuntimeException When the response body cannot be decoded.
+     *
+     * @return object
+     */
+    protected function getResult($lat, $lng, $timestamp = null)
+    {
+        $query = $this->buildUri($lat, $lng, $timestamp);
+        $response = $this->getResponse($query);
+
+        $data = json_decode($response->getBody()->getContents());
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new RuntimeException((string) json_last_error_msg());
+        }
+
+        return $data;
+    }
+
+    /**
+     * Returns the URI for the specified location and timestamp.
+     *
+     * @param string|float $lat       Coordinate latitude.
+     * @param string|float $lng       Coordinate longitude.
+     * @param int|null     $timestamp Seconds since Jan 1, 1970 UTC.
+     *
+     * @return string|UriInterface
+     */
+    abstract protected function buildUri($lat, $lng, $timestamp = null);
 }
